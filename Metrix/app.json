@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Metrix",
+    "slug": "Metrix",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logoMetrix.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splashMetrix.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.arnaudcs.metrix"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logoMetrix.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.arnaudcs.metrix"
+    },
+    "web": {
+      "favicon": "./assets/logoMetrix.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "05bdc721-7fb9-43d8-8081-7db25ef19784"
+      }
+    }
+  }
+}
