@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Text } from 'react-native-elements';
-import { Button, Container, NativeBaseProvider } from "native-base";
+import { Button, Container, NativeBaseProvider, ScrollView } from "native-base";
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, useWindowDimensions} from 'react-native';
 import { Linking } from 'react-native';
 import MyStatusBar from './MyStatusBar';
 import { TextInput } from 'react-native-gesture-handler';
@@ -35,10 +35,13 @@ const ReductionComp = () => {
     
   };
 
+  const styles = useStyles();
+
   return (
     <NativeBaseProvider>
         <View style={styles.container}>
         <MyStatusBar text="Reductions"/>
+        <ScrollView contentContainerStyle={styles.scrollView}>
             <Container style={styles.formContainer}>
                 <Text style={styles.btnTitle}>Original Price</Text>
                 <TextInput
@@ -97,116 +100,130 @@ const ReductionComp = () => {
                 <Button title="Valider" style={styles.btnValidate} onPress={reductionCalcul}><Text style={styles.btnValidateText}>Calculate</Text></Button>
 
             </Container>
+        </ScrollView>
         </View>
     </NativeBaseProvider>
 
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0D2438',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  result: {
-    fontWeight: 'bold',
-    fontSize: 25,
-    color: 'white',
-    maxWidth: 130,
-  },
-  percentage: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  btnActionContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  btnTitle: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  resultTitle: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  inputOriginalPrice: {
-    alignItems: 'center',
-  },
-  resultContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    marginTop: 20,
-  },
-  linkContainer: {
-    marginTop: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  btnValidate: {
-    marginTop: 30,
-    borderRadius: 40,
-    backgroundColor: '#1E3851',
-  },
-  btnValidateText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 25,
-    margin: 10,
-  },
-  input: {
-    height: 60,
-    fontSize: 20,
-    margin: 12,
-    backgroundColor: '#376895',
-    textAlign: 'center',
-    borderColor: 'grey',
-    padding: 10,
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: 40,
-    width: 150,
-  },
-  inputPercent: {
-    height: 60,
-    fontSize: 20,
-    margin: 12,
-    backgroundColor: '#376895',
-    borderColor: 'grey',
-    color: 'white',
-    padding: 10,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    borderRadius: 40,
-    width: 100,
-    },
-  linkButton: {
-    backgroundColor: '#1E3851',
-    height: 60,
-    width: 60,
-    margin: 10,
-    borderRadius: 30,
-  },
-  buttonText: {
-    fontSize: 15,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  formContainer: {
-    flex: 1,
-    alignContent: 'center',
-    marginTop: '10%',
-    alignItems: 'center',
-  },
+function useStyles() {
+  const {width, height} = useWindowDimensions();
 
-});
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#0D2438',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    scrollView: {
+      flex: (height > 800) ? 1 : 0,
+      width: width,
+      height: height,
+      alignItems: 'center',
+    },
+    result: {
+      fontWeight: 'bold',
+      fontSize: height/30,
+      color: 'white',
+      maxWidth: 130,
+    },
+    percentage: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+    },
+    btnActionContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: "5%"
+    },
+    btnTitle: {
+      color: 'white',
+      fontSize: height/37,
+      fontWeight: 'bold',
+    },
+    resultTitle: {
+      fontSize: height/30,
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    inputOriginalPrice: {
+      alignItems: 'center',
+    },
+    resultContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      marginTop: "5%",
+    },
+    linkContainer: {
+      marginTop: 5,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+    },
+    btnValidate: {
+      marginTop: height/20,
+      borderRadius: 40,
+      backgroundColor: '#1E3851',
+    },
+    btnValidateText: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: height/30,
+      margin: 5
+    },
+    input: {
+      height: height/12,
+      fontSize: height/30,
+      margin: 12,
+      backgroundColor: '#376895',
+      textAlign: 'center',
+      borderColor: 'grey',
+      padding: height/60,
+      color: 'white',
+      fontWeight: 'bold',
+      borderRadius: 40,
+      width: width/2,
+    },
+    inputPercent: {
+      height: height/15,
+      fontSize: 20,
+      margin: 12,
+      backgroundColor: '#376895',
+      borderColor: 'grey',
+      color: 'white',
+      padding: 10,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      borderRadius: height/30,
+      width: width/4,
+      },
+    linkButton: {
+      backgroundColor: '#1E3851',
+      height: height/12,
+      aspectRatio: 1,
+      margin: height/120,
+      borderRadius: (height/12)/2,
+    },
+    buttonText: {
+      fontSize: height/50,
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    formContainer: {
+      flex: 1,
+      alignContent: 'center',
+      marginTop: '5%',
+      alignItems: 'center',
+    },
+
+  })
+
+  return styles;
+
+}
 
 export default ReductionComp;

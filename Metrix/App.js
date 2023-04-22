@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AboutComp from './components/AboutComp';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, useWindowDimensions } from 'react-native';
 import ReductionComp from './components/ReductionComp';
 import ProrataComp from './components/ProrataComp';
 
@@ -12,6 +12,8 @@ import ProrataComp from './components/ProrataComp';
 const tab = createBottomTabNavigator();
 
 export default function App() {
+
+  const styles = useStyles();
   return (
     <NavigationContainer style={styles.navigationContainer}>
       <tab.Navigator
@@ -44,26 +46,30 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  navigationContainer: {
-    backgroundColor: '#f2f2f2'
-  },
-  tabBarItem: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  tabBar: {
-    backgroundColor: '#0D2438',
-    height: '10%',
-    borderTopWidth: 0,
-    paddingTop: 10,
-    paddingBottom: 30,
-  }
-    
-});
+function useStyles() {
+  const {width, height} = useWindowDimensions();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    navigationContainer: {
+      backgroundColor: '#f2f2f2'
+    },
+    tabBarItem: {
+      fontWeight: 'bold',
+    },
+    tabBar: {
+      backgroundColor: '#0D2438',
+      height: height/9,
+      borderTopWidth: 0,
+      paddingBottom: (Platform.OS === 'ios') ? 30 : 10,
+    }
+      
+  });
+
+  return styles;
+}

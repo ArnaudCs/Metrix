@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Avatar, Text } from 'react-native-elements';
 import { Button, Container, NativeBaseProvider } from "native-base";
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, useWindowDimensions } from 'react-native';
 import { Linking } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -14,18 +14,91 @@ const handlePress = () => {
   Linking.openURL(url);
 }
 
+function useStyles() {
+  const {width, height} = useWindowDimensions();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#0D2438',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    avatar: {
+      width: "100%",
+      height: "100%",
+    },
+    description: {
+      textAlign: 'center',
+      marginTop: 60,
+      fontSize: (height > 700) ? 20 : height/40,
+      width: '95%',
+      color: 'white',
+      lineHeight: 25,
+      paddingHorizontal: 20,
+    },
+    importantText: {
+      textAlign: 'center',
+      marginTop: "10%",
+      fontSize: (height > 700) ? 20 : height/40,
+      width: '90%',
+      height: '20%',
+      fontWeight: 'bold',
+      color: 'white',
+      lineHeight: 25,
+      paddingHorizontal: 20,
+    },
+    linkContainer: {
+      marginTop: "10%",
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#1E3851',
+      borderRadius: 30,
+      flexDirection: 'row',
+    },
+    linkButton: {
+      backgroundColor: '#0D2438',
+      width: width/6,
+      aspectRatio: 1,
+      margin: "2%",
+      borderRadius: 30,
+    },
+    linkIcon: {
+      fontSize: width/11,
+    },
+    frame: {
+      width: width/3,
+      overflow: "hidden",
+      aspectRatio: 1,
+      backgroundColor: 'white',
+      borderRadius: (width/3)/2,
+    },
+    supframe: {
+      backgroundColor: 'white',
+      borderRadius: (width/3 + (width/40)*2 )/2,
+      padding: width/40,
+    }
+    });
+
+    return styles;
+}
 
 const AboutComp = () => {
+
+  const styles = useStyles();
+
+  // Calcul de la taille de la police en fonction de la largeur de l'écran
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
-        <Container style={styles.frame}>
-          <Avatar
-            rounded
-            size="xlarge"
-            source={require('../assets/profil.png')}
-            containerStyle={styles.avatar}
-          />
+        <Container style={styles.supframe}>
+          <Container style={styles.frame}>
+            <Avatar
+              rounded
+              source={require('../assets/profil.png')}
+              containerStyle={styles.avatar}
+            />
+          </Container>
         </Container>
         
         <Text style={styles.description}>
@@ -54,58 +127,5 @@ const AboutComp = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0D2438',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  avatar: {
-    margin: 10,
-  },
-  description: {
-    textAlign: 'center',
-    marginTop: 60,
-    fontSize: 20,
-    width: '90%',
-    color: 'white',
-    lineHeight: 25,
-    paddingHorizontal: 20,
-  },
-  importantText: {
-      textAlign: 'center',
-      marginTop: 60,
-      fontSize: 20,
-      width: '90%',
-      fontWeight: 'bold',
-      color: 'white',
-      lineHeight: 25,
-      paddingHorizontal: 20,
-  },
-  linkContainer: {
-    marginTop: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#1E3851',
-    borderRadius: 30,
-    flexDirection: 'row',
-  },
-  linkButton: {
-    backgroundColor: '#0D2438',
-    height: 60,
-    width: 60,
-    margin: 10,
-    borderRadius: 30,
-  },
-  linkIcon: {
-    fontSize: 35,
-  },
-  frame: {
-    backgroundColor: 'white',
-    borderRadius: 100,
-    marginTop: 10,
-  }
-});
 
 export default AboutComp;
