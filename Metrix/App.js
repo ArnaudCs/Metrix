@@ -7,42 +7,46 @@ import AboutComp from './components/AboutComp';
 import { ImageBackground, useWindowDimensions } from 'react-native';
 import ReductionComp from './components/ReductionComp';
 import ProrataComp from './components/ProrataComp';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
-const tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-
   const styles = useStyles();
+
   return (
-    <NavigationContainer style={styles.navigationContainer}>
-      <tab.Navigator
-        screenOptions={({route}) => {
-          return {
-            tabBarIcon: ({focused, color, size}) => {
-              let iconName;
-              if (route.name === 'Reductions') {
-                iconName = 'cart-outline';
-              } else if (route.name === 'Prorata') {
-                iconName = 'cash-outline';
-              } else if (route.name === 'About') {
-                iconName = 'information-circle-outline';
-              }
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarStyle: styles.tabBar,
-            tabBarItemStyle: styles.tabBarItem,
-            tabBarActiveTintColor: 'white',
-            tabBarInactiveTintColor: '#376895',
-            tabBarLabelStyle: styles.tabLabel,
-            tabBarHideOnKeyboard: true,
-          }
-        }}>
-        <tab.Screen name="Reductions" component={ReductionComp} options={{ headerShown: false }}/>
-        <tab.Screen name="Prorata" component={ProrataComp} options={{ headerShown: false }}/>
-        <tab.Screen name="About" component={AboutComp} options={{ headerShown: false }}/>
-      </tab.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer style={styles.navigationContainer}>
+        <Tab.Navigator
+          screenOptions={({ route }) => {
+            return {
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+                if (route.name === 'Reductions') {
+                  iconName = 'cart-outline';
+                } else if (route.name === 'Prorata') {
+                  iconName = 'cash-outline';
+                } else if (route.name === 'About') {
+                  iconName = 'information-circle-outline';
+                }
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+              tabBarStyle: styles.tabBar,
+              tabBarItemStyle: styles.tabBarItem,
+              tabBarActiveTintColor: 'white',
+              tabBarInactiveTintColor: '#376895',
+              tabBarLabelStyle: styles.tabLabel,
+              tabBarHideOnKeyboard: true,
+            };
+          }}
+        >
+          <Tab.Screen name="Reductions" component={ReductionComp} options={{ headerShown: false }} />
+          <Tab.Screen name="Prorata" component={ProrataComp} options={{ headerShown: false }} />
+          <Tab.Screen name="About" component={AboutComp} options={{ headerShown: false }} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 

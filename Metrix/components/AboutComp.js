@@ -56,6 +56,15 @@ function useStyles() {
       borderRadius: 30,
       flexDirection: 'row',
     },
+    versionContainer: {
+      marginTop: "10%",
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#1E3851',
+      borderRadius: 30,
+      padding: 10,
+      flexDirection: 'row',
+    },
     linkButton: {
       backgroundColor: '#0D2438',
       width: width/6,
@@ -95,7 +104,7 @@ const AboutComp = () => {
           <Container style={styles.frame}>
             <Avatar
               rounded
-              source={require('../assets/profil.png')}
+              source={require('../assets/profil.jpeg')}
               containerStyle={styles.avatar}
             />
           </Container>
@@ -121,6 +130,10 @@ const AboutComp = () => {
           <Button style={styles.linkButton} onPress={() => Linking.openURL('https://arnaudcs.github.io/')}>
             <Icon name="planet" color="white" style={styles.linkIcon}/>
           </Button>
+        </Container>
+
+        <Container style={styles.versionContainer}>
+          <Text style={{color: 'white'}}>Version 1.0.2</Text>
         </Container>
       </View>
     </NativeBaseProvider>
