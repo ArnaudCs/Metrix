@@ -2,7 +2,7 @@
   "expo": {
     "name": "Metrix",
     "slug": "Metrix",
-    "version": "1.0.2",
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/logoMetrix.png",
     "userInterfaceStyle": "dark",
