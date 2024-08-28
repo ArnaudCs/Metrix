@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/logoMetrix.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.arnaudcs.metrix"
+      "package": "com.arnaudcs.metrixapp"
     },
     "web": {
       "favicon": "./assets/logoMetrix.png"
